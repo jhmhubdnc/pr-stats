@@ -10,7 +10,7 @@ import type {IResult} from "@/types";
 export const participationRate = (user: User): IResult<number> => {
     const participationCount = user.reviewInfos.filter(({participated}) => participated).length;
     const requestedCount = user.requestedPRs.length;
-    const value = (participationCount / requestedCount) * 100;
+    const value = participationCount === 0 ? 0 : (participationCount / requestedCount) * 100;
 
     return {value, message: `Participation rate: ${value.toFixed(2)}%`};
 };
